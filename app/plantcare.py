@@ -68,7 +68,8 @@ plant_reminders_db = [
 
 # GET endpoints
 
-#dit is een test
+
+# dit is een test
 
 @app.get("/plant-reminders/", response_model=List[PlantReminder])
 async def get_plant_reminders():
