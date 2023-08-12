@@ -1,10 +1,10 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-import crud
-import models
-import schemas
-from database import SessionLocal, engine
+import app.crud as crud
+import app.models as models
+import app.schemas as schemas
+from app.database import SessionLocal, engine
 import os
 
 
@@ -26,6 +26,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 
 
 @app.get("/users/", response_model=list[schemas.User])
