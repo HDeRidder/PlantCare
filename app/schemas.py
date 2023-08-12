@@ -1,5 +1,22 @@
 from pydantic import BaseModel
 
+class UserBase(BaseModel):
+    email: str
+
+
+class UserCreate(UserBase):
+    password: str
+
+
+class User(UserBase):
+    id: int
+    is_active: bool
+    items: list[PlantReminder] = []
+
+    class Config:
+        orm_mode = True
+
+
 class PlantReminderBase(BaseModel):
     plant_name: str
     watering: str
@@ -16,18 +33,3 @@ class PlantReminder(PlantReminderBase):
         orm_mode = True
 
 
-class UserBase(BaseModel):
-    email: str
-
-
-class UserCreate(UserBase):
-    password: str
-
-
-class User(UserBase):
-    id: int
-    is_active: bool
-    items: list[PlantReminder] = []
-
-    class Config:
-        orm_mode = True
