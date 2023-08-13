@@ -1,6 +1,6 @@
 # PlantCare API - Harold De Ridder
 ## Informatie over het gekozen onderwerp
-  >Deze API heeft als doel de gebruiker informatie te verschaffen over planten die hij of zij thuis heeft. De API staat namelijk in verbinding met een SQLite Database, waar de volgende zaken instaan;
+Deze API heeft als doel de gebruiker informatie te verschaffen over planten die hij of zij thuis heeft. De API staat namelijk in verbinding met een SQLite Database, waar de volgende zaken instaan;
 
 - De naam van de plant
 - Hoeveel water deze plant nodig heeft
