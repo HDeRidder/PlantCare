@@ -35,3 +35,10 @@ def create_plantreminder(db: Session, item: schemas.PlantReminderCreate, user_id
     db.commit()
     db.refresh(db_item)
     return db_item
+
+def get_plantreminders_by_lighting(db: Session, lighting: str, skip: int = 0, limit: int = 100):
+    return db.query(models.PlantReminder).filter(models.PlantReminder.lighting == lighting).offset(skip).limit(limit).all()
+
+
+def get_plantreminders_by_watering(db: Session, watering: str, skip: int = 0, limit: int = 100):
+    return db.query(models.PlantReminder).filter(models.PlantReminder.watering == watering).offset(skip).limit(limit).all()

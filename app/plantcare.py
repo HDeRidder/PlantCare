@@ -29,21 +29,12 @@ def get_db():
 
 
 
+# GET endpoints
+
 @app.get("/users/", response_model=list[schemas.User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
-
-@app.post("/users/", response_model=schemas.User)
-def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_email(db, email=user.email)
-    if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    return crud.create_user(db=db, user=user)
-
-
-
-
 
 @app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
@@ -52,6 +43,30 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
+@app.get("/plantreminders/", response_model=list[schemas.PlantReminder])
+def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    items = crud.get_plantreminders(db, skip=skip, limit=limit)
+    return items
+
+@app.get("/plantreminders/lighting/", response_model=list[schemas.PlantReminder])
+def read_plantreminders_by_lighting(lighting: str, db: Session = Depends(get_db)):
+    plantreminders = crud.get_plantreminders_by_lighting(db, lighting=lighting)
+    return plantreminders
+
+
+@app.get("/plantreminders/watering/", response_model=list[schemas.PlantReminder])
+def read_plantreminders_by_watering(watering: str, db: Session = Depends(get_db)):
+    plantreminders = crud.get_plantreminders_by_watering(db, watering=watering)
+    return plantreminders
+
+# POST endpoints
+
+@app.post("/users/", response_model=schemas.User)
+def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_user = crud.get_user_by_email(db, email=user.email)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    return crud.create_user(db=db, user=user)
 
 @app.post("/users/{user_id}/plantreminders/", response_model=schemas.PlantReminder)
 def create_item_for_user(
@@ -60,10 +75,6 @@ def create_item_for_user(
     return crud.create_plantreminder(db=db, item=item, user_id=user_id)
 
 
-@app.get("/plantreminders/", response_model=list[schemas.PlantReminder])
-def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    items = crud.get_plantreminders(db, skip=skip, limit=limit)
-    return items
 
 
 if __name__ == "__main__":
