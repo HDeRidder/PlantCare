@@ -43,15 +43,14 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
-@app.get("/plantreminders/", response_model=list[schemas.PlantReminder])
-def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    items = crud.get_plantreminders(db, skip=skip, limit=limit)
-    return items
-
-@app.get("/plantreminders/plantname/", response_model=list[schemas.PlantReminder])
-def read_plantreminders_by_plantname(plantname: str, db: Session = Depends(get_db)):
-    plantreminders = crud.get_plantreminders_by_plantname(db, plantname=plantname)
+@app.get("/plantreminders/")
+def read_plantreminders(plantname: str = None, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    if plantname:
+        plantreminders = crud.get_plantreminders_by_plantname(db, plantname=plantname, skip=skip, limit=limit)
+    else:
+        plantreminders = crud.get_plantreminders(db, skip=skip, limit=limit)
     return plantreminders
+
 
 
 @app.get("/plantreminders/lighting/", response_model=list[schemas.PlantReminder])
