@@ -75,7 +75,37 @@ def create_item_for_user(
     return crud.create_plantreminder(db=db, item=item, user_id=user_id)
 
 
+# PUT endpoints
 
+@app.put("/users/{user_id}", response_model=schemas.User)
+def update_user(user_id: int, user_update: schemas.UserUpdate, db: Session = Depends(get_db)):
+    db_user = crud.get_user(db, user_id=user_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return crud.update_user(db=db, user_id=user_id, user_update=user_update)
+
+@app.put("/plantreminders/{plantreminder_id}", response_model=schemas.PlantReminder)
+def update_plantreminder(plantreminder_id: int, plantreminder_update: schemas.PlantReminderUpdate, db: Session = Depends(get_db)):
+    db_plantreminder = crud.get_plantreminders(db, plantreminder_id=plantreminder_id)
+    if db_plantreminder is None:
+        raise HTTPException(status_code=404, detail="Plant reminder not found")
+    return crud.update_plantreminder(db=db, plantreminder_id=plantreminder_id, plantreminder_update=plantreminder_update)
+
+# DELETE endpoints
+
+@app.delete("/users/{user_id}", response_model=schemas.User)
+def delete_user(user_id: int, db: Session = Depends(get_db)):
+    db_user = crud.get_user(db, user_id=user_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return crud.delete_user(db=db, user_id=user_id)
+
+@app.delete("/plantreminders/{plantreminder_id}", response_model=schemas.PlantReminder)
+def delete_plantreminder(plantreminder_id: int, db: Session = Depends(get_db)):
+    db_plantreminder = crud.get_plantreminders(db, plantreminder_id=plantreminder_id)
+    if db_plantreminder is None:
+        raise HTTPException(status_code=404, detail="Plant reminder not found")
+    return crud.delete_plantreminder(db=db, plantreminder_id=plantreminder_id)
 
 if __name__ == "__main__":
     import uvicorn

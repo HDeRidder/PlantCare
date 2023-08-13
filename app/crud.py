@@ -42,3 +42,46 @@ def get_plantreminders_by_lighting(db: Session, lighting: str, skip: int = 0, li
 
 def get_plantreminders_by_watering(db: Session, watering: str, skip: int = 0, limit: int = 100):
     return db.query(models.PlantReminder).filter(models.PlantReminder.watering == watering).offset(skip).limit(limit).all()
+
+
+def update_user(db: Session, user_id: int, user_update: schemas.UserUpdate):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if db_user is None:
+        return None
+    for key, value in user_update.dict().items():
+        setattr(db_user, key, value)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+
+# Update plant reminder
+def update_plantreminder(db: Session, plantreminder_id: int, plantreminder_update: schemas.PlantReminderUpdate):
+    db_plantreminder = db.query(models.PlantReminder).filter(models.PlantReminder.id == plantreminder_id).first()
+    if db_plantreminder is None:
+        return None
+    for key, value in plantreminder_update.dict().items():
+        setattr(db_plantreminder, key, value)
+    db.commit()
+    db.refresh(db_plantreminder)
+    return db_plantreminder
+
+
+# Delete user
+def delete_user(db: Session, user_id: int):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if db_user is None:
+        return None
+    db.delete(db_user)
+    db.commit()
+    return db_user
+
+
+# Delete plant reminder
+def delete_plantreminder(db: Session, plantreminder_id: int):
+    db_plantreminder = db.query(models.PlantReminder).filter(models.PlantReminder.id == plantreminder_id).first()
+    if db_plantreminder is None:
+        return None
+    db.delete(db_plantreminder)
+    db.commit()
+    return db_plantreminder

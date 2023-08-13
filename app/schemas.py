@@ -33,3 +33,10 @@ class PlantReminder(PlantReminderBase):
         orm_mode = True
 
 
+class UserUpdate(BaseModel):
+    email: str
+
+class PlantReminderUpdate(BaseModel):
+    plant_name: str
+    watering: str
+    lighting: str
