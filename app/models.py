@@ -26,6 +26,6 @@ class PlantReminder(Base):
     lighting = Column(String, index=True)
     owner_id = Column(Integer, ForeignKey("users.id"))
 
-    owner = relationship("User", back_populates="plantreminders")
+    owner = relationship("User", back_populates="items")
 
 
