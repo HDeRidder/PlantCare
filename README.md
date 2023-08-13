@@ -6,7 +6,7 @@
 - Hoeveel water deze plant nodig heeft
 - Hoeveel licht deze plant nodig heeft
   
-  >Men kan als gebruiker zoeken naar een bepaalde plant om de nodige zorg te weten te komen, of men kan filteren op de nodige lichtintensiteit of de hoeveelheid water, om ineens een overzicht te krijgen van alle planten met dezelfde noden.
+Men kan als gebruiker zoeken naar een bepaalde plant om de nodige zorg te weten te komen, of men kan filteren op de nodige lichtintensiteit of de hoeveelheid water, om ineens een overzicht te krijgen van alle planten met dezelfde noden.
 
 ## Links
 ### API op Okteto
