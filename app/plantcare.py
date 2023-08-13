@@ -48,6 +48,12 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_plantreminders(db, skip=skip, limit=limit)
     return items
 
+@app.get("/plantreminders/plantname/", response_model=list[schemas.PlantReminder])
+def read_plantreminders_by_plantname(plantname: str, db: Session = Depends(get_db)):
+    plantreminders = crud.get_plantreminders_by_plantname(db, plantname=plantname)
+    return plantreminders
+
+
 @app.get("/plantreminders/lighting/", response_model=list[schemas.PlantReminder])
 def read_plantreminders_by_lighting(lighting: str, db: Session = Depends(get_db)):
     plantreminders = crud.get_plantreminders_by_lighting(db, lighting=lighting)
