@@ -60,7 +60,7 @@ def update_user(db: Session, user_id: int, user_update: schemas.UserUpdate):
 
 
 # Update plant reminder
-def update_plantreminder_by_name(db: Session, plant_name: str, plantreminder_update: schemas.PlantReminderUpdate):
+def update_plantreminder(db: Session, plant_name: str, plantreminder_update: schemas.PlantReminderUpdate):
     db_plantreminder = db.query(models.PlantReminder).filter(models.PlantReminder.plant_name == plant_name).first()
     if db_plantreminder is None:
         return None

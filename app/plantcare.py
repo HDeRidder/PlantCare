@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 import app.crud as crud
@@ -92,9 +92,9 @@ def update_user(user_id: int, user_update: schemas.UserUpdate, db: Session = Dep
 
 @app.put("/plantreminders/")
 def update_plantreminder_by_name_query(
-        plant_name: str,
-        plantreminder_update: schemas.PlantReminderUpdate,
-        db: Session = Depends(get_db)
+    plantreminder_update: schemas.PlantReminderUpdate,
+    plant_name: str = Query(..., description="Name of the plant to update"),
+    db: Session = Depends(get_db)
 ):
     db_plantreminder = crud.get_plantreminders_by_plantname(db, plantname=plant_name)
     if not db_plantreminder:
