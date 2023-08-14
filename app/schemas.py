@@ -27,6 +27,9 @@ class PlantReminderCreate(PlantReminderBase):
 
 class PlantReminder(PlantReminderBase):
     id: int
+    plant_name: str
+    watering: str
+    lighting: str
     owner_id: int
 
     class Config:
