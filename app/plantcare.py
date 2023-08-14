@@ -89,12 +89,6 @@ def update_user(user_id: int, user_update: schemas.UserUpdate, db: Session = Dep
         raise HTTPException(status_code=404, detail="User not found")
     return crud.update_user(db=db, user_id=user_id, user_update=user_update)
 
-@app.put("/plantreminders/{plantreminder_id}", response_model=schemas.PlantReminder)
-def update_plantreminder(plantreminder_id: int, plantreminder_update: schemas.PlantReminderUpdate, db: Session = Depends(get_db)):
-    db_plantreminder = crud.get_plantreminders(db, plantreminder_id=plantreminder_id)
-    if db_plantreminder is None:
-        raise HTTPException(status_code=404, detail="Plant reminder not found")
-    return crud.update_plantreminder(db=db, plantreminder_id=plantreminder_id, plantreminder_update=plantreminder_update)
 
 @app.put("/plantreminders/{plant_name}", response_model=schemas.PlantReminder)
 def update_plantreminder_by_name(plantname: str, plantreminder_update: schemas.PlantReminderUpdate, db: Session = Depends(get_db)):
