@@ -59,18 +59,6 @@ def update_user(db: Session, user_id: int, user_update: schemas.UserUpdate):
     return db_user
 
 
-# Update plant reminder
-def update_plantreminder(db: Session, plant_name: str, plantreminder_update: schemas.PlantReminderUpdate):
-    db_plantreminder = db.query(models.PlantReminder).filter(models.PlantReminder.plant_name == plant_name).first()
-    if db_plantreminder is None:
-        return None
-
-    for key, value in plantreminder_update.dict().items():
-        setattr(db_plantreminder, key, value)
-
-    db.commit()
-    db.refresh(db_plantreminder)
-    return db_plantreminder
 
 # Delete user
 def delete_user(db: Session, user_id: int):
