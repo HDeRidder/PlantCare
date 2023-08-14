@@ -60,16 +60,17 @@ def update_user(db: Session, user_id: int, user_update: schemas.UserUpdate):
 
 
 # Update plant reminder
-def update_plantreminder(db: Session, plantreminder_id: int, plantreminder_update: schemas.PlantReminderUpdate):
-    db_plantreminder = db.query(models.PlantReminder).filter(models.PlantReminder.id == plantreminder_id).first()
+def update_plantreminder_by_name(db: Session, plant_name: str, plantreminder_update: schemas.PlantReminderUpdate):
+    db_plantreminder = db.query(models.PlantReminder).filter(models.PlantReminder.plant_name == plant_name).first()
     if db_plantreminder is None:
         return None
+
     for key, value in plantreminder_update.dict().items():
         setattr(db_plantreminder, key, value)
+
     db.commit()
     db.refresh(db_plantreminder)
     return db_plantreminder
-
 
 # Delete user
 def delete_user(db: Session, user_id: int):

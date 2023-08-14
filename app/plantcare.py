@@ -90,13 +90,21 @@ def update_user(user_id: int, user_update: schemas.UserUpdate, db: Session = Dep
     return crud.update_user(db=db, user_id=user_id, user_update=user_update)
 
 
-@app.put("/plantreminders/{plant_name}", response_model=schemas.PlantReminder)
-def update_plantreminder_by_name(plant_name: str, plantreminder_update: schemas.PlantReminderUpdate, db: Session = Depends(get_db)):
+@app.put("/plantreminders/")
+def update_plantreminder_by_name_query(
+        plant_name: str,
+        plantreminder_update: schemas.PlantReminderUpdate,
+        db: Session = Depends(get_db)
+):
     db_plantreminder = crud.get_plantreminders_by_plantname(db, plantname=plant_name)
     if not db_plantreminder:
         raise HTTPException(status_code=404, detail="Plant reminder not found")
-    return crud.update_plantreminder(db=db, plantreminder_id=db_plantreminder.id, plantreminder_update=plantreminder_update)
 
+    return crud.update_plantreminder(
+        db=db,
+        plantreminder_id=db_plantreminder[0].id,
+        plantreminder_update=plantreminder_update
+    )
 
 # DELETE endpoints
 
