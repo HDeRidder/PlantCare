@@ -137,3 +137,8 @@ Men kan als gebruiker zoeken naar een bepaalde plant om de nodige zorg te weten 
 13) Plantreminder verwijderen op basis van id
 
   ![image](https://github.com/HDeRidder/PlantCare/assets/71796628/0288c032-296b-4d16-b996-0767a355dbd3)
+
+14) Schemas
+
+  ![image](https://github.com/HDeRidder/PlantCare/assets/71796628/6fb984fe-7a26-46ad-8057-8015c7583f87)
+  ![image](https://github.com/HDeRidder/PlantCare/assets/71796628/3659e578-1cca-494e-990e-f86283c87efb)
