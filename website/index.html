@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Consumer</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <h1 x-data="{ message: 'API Consumer' }" x-text="message"></h1>
+
+    <!-- GET Request: /users/ -->
+    <div x-data="{
+        users: null,
+        async getUsers() {
+            this.users = await (await fetch('http://localhost:8000/users/')).json();
+        }
+    }">
+        <button x-on:click="getUsers">Get Users</button>
+        <ul x-show="users">
+            <li x-for="user in users" x-text="user.email"></li>
+        </ul>
+    </div>
+
+    <!-- GET Request: /users/{user_id} -->
+    <div x-data="{
+        userId: null,
+        user: null,
+        async getUser() {
+            const response = await fetch(`http://localhost:8000/users/${this.userId}`);
+            if (response.ok) {
+                this.user = await response.json();
+            }
+        }
+    }">
+        <input type="text" x-model="userId" placeholder="User ID">
+        <button x-on:click="getUser">Get User</button>
+        <div x-show="user">
+            <p>User ID: <span x-text="user.id"></span></p>
+            <p>Email: <span x-text="user.email"></span></p>
+        </div>
+    </div>
+
+    <!-- GET Request: /plantreminders/ -->
+    <div x-data="{
+        plantReminders: null,
+        async getPlantReminders() {
+            this.plantReminders = await (await fetch('http://localhost:8000/plantreminders/')).json();
+        }
+    }">
+        <button x-on:click="getPlantReminders">Get Plant Reminders</button>
+        <ul x-show="plantReminders">
+            <li x-for="reminder in plantReminders" x-text="reminder.plantname"></li>
+        </ul>
+    </div>
+
+    <!-- POST Request: /users/ -->
+    <div x-data="{
+        newUser: {
+            email: '',
+            password: ''
+        },
+        postUserResponse: '',
+        async postUser() {
+            const response = await fetch('http://localhost:8000/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.newUser)
+            });
+            const data = await response.json();
+            this.postUserResponse = JSON.stringify(data, null, 2);
+        }
+    }">
+        <input type="text" x-model="newUser.email" placeholder="Email">
+        <input type="text" x-model="newUser.password" placeholder="Password">
+        <button x-on:click="postUser">Create User</button>
+        <pre x-text="postUserResponse"></pre>
+    </div>
+
+    <!-- ... other endpoints ... -->
+
+</body>
+</html>
