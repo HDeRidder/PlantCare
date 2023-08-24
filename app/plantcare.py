@@ -48,7 +48,9 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:8000",
-    "https://app-hderidder.cloud.okteto.net"
+    "https://app-hderidder.cloud.okteto.net",
+    "https://plantcareapi.netlify.app",
+    "https://app-hderidder.cloud.okteto.net/"
 ]
 
 app.add_middleware(
