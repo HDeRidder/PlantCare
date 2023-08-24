@@ -32,65 +32,44 @@
         <input type="text" x-model="loginForm.username" placeholder="Username">
         <input type="password" x-model="loginForm.password" placeholder="Password">
         <button x-on:click="login">Login</button>
-        <p x-text="accessToken ? 'Access Token: ' + accessToken : ''"></p>
-    </div>
-
-    <!-- POST Request: Create New User -->
-    <div x-data="{
-        newUserForm: {
-            email: '',
-            password: ''
-        },
-        createUserResponse: '',
-        async createUser() {
-            const response = await fetch('http://localhost:8000/users/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + accessToken
-                },
-                body: JSON.stringify(this.newUserForm)
-            });
-            const data = await response.json();
-            this.createUserResponse = JSON.stringify(data, null, 2);
-        }
-    }">
-        <input type="text" x-model="newUserForm.email" placeholder="Email">
-        <input type="password" x-model="newUserForm.password" placeholder="Password">
-        <button x-on:click="createUser">Create User</button>
-        <pre x-text="createUserResponse"></pre>
     </div>
 
     <!-- GET Request: /users/ -->
     <div x-data="{
-        users: null,
+        users: [],
         async getUsers() {
-            this.users = await (await fetch('http://localhost:8000/users/', {
+            const response = await fetch('http://localhost:8000/users/', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
-            })).json();
+            });
+            if (response.ok) {
+                this.users = await response.json();
+            }
         }
     }">
         <button x-on:click="getUsers">Get Users</button>
-        <ul x-show="users">
+        <ul x-show="users.length > 0">
             <li x-for="user in users" x-text="user.email"></li>
         </ul>
     </div>
 
     <!-- GET Request: /plantreminders/ -->
     <div x-data="{
-        plantReminders: null,
+        plantReminders: [],
         async getPlantReminders() {
-            this.plantReminders = await (await fetch('http://localhost:8000/plantreminders/', {
+            const response = await fetch('http://localhost:8000/plantreminders/', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
-            })).json();
+            });
+            if (response.ok) {
+                this.plantReminders = await response.json();
+            }
         }
     }">
         <button x-on:click="getPlantReminders">Get Plant Reminders</button>
-        <ul x-show="plantReminders">
+        <ul x-show="plantReminders.length > 0">
             <li x-for="reminder in plantReminders" x-text="reminder.plantname"></li>
         </ul>
     </div>
