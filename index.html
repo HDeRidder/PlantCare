@@ -18,6 +18,7 @@
         },
         accessToken: '',
         async login() {
+            console.log('Login button clicked');
             const response = await fetch('http://localhost:8000/token', {
                 method: 'POST',
                 headers: {
@@ -38,6 +39,7 @@
     <div x-data="{
         users: [],
         async getUsers() {
+            console.log('Get Users button clicked');
             const response = await fetch('http://localhost:8000/users/', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
@@ -58,6 +60,7 @@
     <div x-data="{
         plantReminders: [],
         async getPlantReminders() {
+            console.log('Get Plant Reminders button clicked');
             const response = await fetch('http://localhost:8000/plantreminders/', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
