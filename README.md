@@ -11,6 +11,10 @@ Men kan als gebruiker zoeken naar een bepaalde plant om de nodige zorg te weten 
 ## Links
 ### API op Okteto
 * [Oketo endpoint](https://app-hderidder.cloud.okteto.net/)
+  
+### API op Netlify
+* [Netlify](https://plantcareapi.netlify.app/)
+
 
 ## Screenshots 
 
