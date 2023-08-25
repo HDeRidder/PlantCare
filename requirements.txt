@@ -7,3 +7,5 @@ argon2_cffi
 bcrypt
 python-jose[cryptography]
 python-multipart
+pytest
+requests
