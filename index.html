@@ -77,5 +77,104 @@
         </ul>
     </div>
 
+    <!-- POST Request: /users/ -->
+    <div x-data="{
+        newUserForm: {
+            email: '',
+            password: ''
+        },
+        async createUser() {
+            console.log('Create User button clicked');
+            const response = await fetch('http://localhost:8000/users/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.newUserForm)
+            });
+            if (response.ok) {
+                // Handle success
+            }
+        }
+    }">
+        <input type="text" x-model="newUserForm.email" placeholder="Email">
+        <input type="password" x-model="newUserForm.password" placeholder="Password">
+        <button x-on:click="createUser">Create User</button>
+    </div>
+
+    <!-- PUT Request: /users/{user_id} -->
+    <div x-data="{
+        updateUserForm: {
+            email: '',
+            password: ''
+        },
+        async updateUser() {
+            console.log('Update User button clicked');
+            const userId = 1; // Replace with the desired user ID
+            const response = await fetch(`http://localhost:8000/users/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.updateUserForm)
+            });
+            if (response.ok) {
+                // Handle success
+            }
+        }
+    }">
+        <input type="text" x-model="updateUserForm.email" placeholder="New Email">
+        <input type="password" x-model="updateUserForm.password" placeholder="New Password">
+        <button x-on:click="updateUser">Update User</button>
+    </div>
+
+    <!-- DELETE Request: /users/{user_id} -->
+    <div x-data="{
+        deleteUserForm: {
+            userId: ''
+        },
+        async deleteUser() {
+            console.log('Delete User button clicked');
+            const userId = 1; // Replace with the desired user ID
+            const response = await fetch(`http://localhost:8000/users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            });
+            if (response.ok) {
+                // Handle success
+            }
+        }
+    }">
+        <input type="text" x-model="deleteUserForm.userId" placeholder="User ID">
+        <button x-on:click="deleteUser">Delete User</button>
+    </div>
+
+    <!-- DELETE Request: /plantreminders/{plantreminder_id} -->
+    <div x-data="{
+        deletePlantReminderForm: {
+            plantReminderId: ''
+        },
+        async deletePlantReminder() {
+            console.log('Delete Plant Reminder button clicked');
+            const plantReminderId = 1; // Replace with the desired plant reminder ID
+            const response = await fetch(`http://localhost:8000/plantreminders/${plantReminderId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            });
+            if (response.ok) {
+                // Handle success
+            }
+        }
+    }">
+        <input type="text" x-model="deletePlantReminderForm.plantReminderId" placeholder="Plant Reminder ID">
+        <button x-on:click="deletePlantReminder">Delete Plant Reminder</button>
+    </div>
+
 </body>
 </html>
