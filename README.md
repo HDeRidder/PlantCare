@@ -142,3 +142,9 @@ Men kan als gebruiker zoeken naar een bepaalde plant om de nodige zorg te weten 
 
   ![image](https://github.com/HDeRidder/PlantCare/assets/71796628/6fb984fe-7a26-46ad-8057-8015c7583f87)
   ![image](https://github.com/HDeRidder/PlantCare/assets/71796628/3659e578-1cca-494e-990e-f86283c87efb)
+
+### Pytest
+
+Ik begrijp niet zo goed waarom, maar plots werken enkele endpoints niet meer. Zoals je kan zien was dat wel het geval op het moment dat ik de screenshots nam (hierboven).
+![image](https://github.com/HDeRidder/PlantCare/assets/71796628/e25755e5-e314-4512-824b-a624ba521e4e)
+
