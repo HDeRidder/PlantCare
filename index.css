@@ -1,0 +1,82 @@
+/* Reset some default styles */
+body, h1, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color and font */
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #3db39e;
+    color: #fff;
+}
+
+/* Container for the login and data sections */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.form {
+    margin-bottom: 20px;
+}
+
+.form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3db39e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form button:hover {
+    background-color: #319688;
+}
+
+/* List styling */
+.list {
+    text-align: left;
+    list-style-type: none;
+}
+
+.list li {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Add some space between different sections */
+.space {
+    margin-top: 20px;
+}
